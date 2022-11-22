@@ -146,8 +146,67 @@ Outros recursos importantes do process são as mensagens:
 eles se parecem com o console.log("hello'); e escreve-se process.stdout.write('hello\n');
 
 
+## Modern JavaScript
+### EcmaScript and TC39
+Hoje existe o Comitê Técnico do ECMAScript, conhecido como TC39 que faz lançamentos anuais do ECMAScript.
+O ECMAScript começou pelo ECMAScript 2015, ou conhecido como ES6.
+Para implementar um recurso no ECMAScript é preciso passar por algumas etapas:
+Estágio 0: é quando alguém propóe algo ao comitê 
+Estágio 1: é rotulado se o recurso proposto tem um problema claro e um caso claro para a sua necessidade e alguém está disposto a apoiá-lo durante o processo.
+Estágio 2: o recurso será rotulado quando tiver um documento de especificação inicial. Nesse ponto, há uma forte chance de o recurso fazer parte da linguagem.
+Estágio 3: é rotulado quando a especificação do recurso é finalizada e os revisores designados aprovam. O recurso é colocado na fila para mais testes.
+Estágio 4: O comitê aceitará o texto da especificação em seu repositório de especificações principal. E então, esse recurso será incluído na próxima versão anual do ECMAScript.
+
+No Node.js só temos acessos aos recursos finalizados e que já foram inseridos no Node.
+É possível usar o [Babel](https://babeljs.io/) para usar os recursos em andamento do JavaScript.
+
+
+### Variables and Block Scopes
+Escopo de Blocos são diferentes dos Escopos de Função. Variáveis criadas como **var** no escopo de função não escapam desse escopo. Se tentarmos acessá-lo fora do escopo, não conseguiremos. Por outro lado, quando criamos uma variável com **var** dentro de um escopo de bloco, podemos acessá-las totalmente fora desse escopo posteriormente. O **var** criado dentro do loop for pode ser acessado fora do escopo, o que é problemático. Para resolver isso no JavaScript, devemos declarar variáveis com **let** ou **const**, que resolve o problema de acessar essas variáveis fora do escopo.
+Usamos **const**  quando a variável é constante, pois não podemos mudar a referência da variável const. Porém, se a referência for direcionado a um objeto, ainda podemos alterá-lo, da mesma forma com funções que recebem objetos como argumentos.
+Para obter a **imutabilidade dos objetos**, o JavaScript oferece um método de congelamento chamado, **Object.freeze()**, mas ele congela apenas o primeiro nível desse objeto. Portanto, se existir um objeto aninhado dentro do primeiro objeto, esse objeto aninhado não será congelado. Se desejamos trabalhar com objetos imutáveis, precisamos usar a biblioteca **Immutable.js**.
+
+
+### Arrow Functions
+Uma arrow function não se importa com quem a chama, enquanto uma função regular se importa muito com isso.
+Uma função como abaixo, sempre vincula o valor de sua palavra-chave **this** para seu chamador. E se não tiver um chamador explícito, uma função regular usará o valor de **undefined** para sua palavra-chave **this**.
+const X = function() {
+
+}
+
+Uma arrow function, por outro lado, como a função abaixo, não se importa com quem a chamou, fechará o valor da palavra-chave **this** para seu escopo no momento em que foi definida, tornando0a ótima para casos de delayed execution, como events e listeners, porque dá fácil acesso no ambiente de definição.
+const Y = () => {
+
+};
+
+
+### Object Literals
+const obj = {
+    // key: value,
+    [ mystery ]: 42 // uma forma de declarar varíavel dinâmica
+};
 
 
 
+### Destructuring and Rest/Spread
+const { PI, E, SQRT2 } = Math;
+
+Isso também pode ser usado em argumentos de uma função, conforme exemplo 8-destructuring.js
+o mesmo funciona para arrays
+const [first, second,, forth] = [10, 20, 30, 40];
+
+Para o exemplo do rest, verificar o arquivo 9-rest-spread.js
+
+
+### Template Strings
+Uma forma de definir string é por backtick, ou seja, ``, que possibilita usar interpolação.
+
+
+### Classes
+Verificar o arquivo 11-classes.js
+
+### Promises and Async/Await
+Node é orientado a eventos. A maioria das funções com as quais trabalharemos no Node retornam **Promises**, e teremos que consumi-las usando a sintaxe de Promise com **.then** e **.catch**.
+Porém, outra forma de usar é o await/async que facilita a visualização do código.
 
 
